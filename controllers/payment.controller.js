@@ -77,9 +77,10 @@ export const paymentVerification = async (req, res) => {
 
       await cartModel.deleteMany({ userID: userID });
 
-      res.redirect(
-        `${process.env.CLIENT_URL}/my_orders?reference=${razorpay_payment_id}`,
-      );
+      res.redirect(`${process.env.CLIENT_URL}`);
+      // res.redirect(
+      //   `${process.env.CLIENT_URL}/my_orders?reference=${razorpay_payment_id}`,
+      // );
     } else {
       res.status(400).json({
         success: false,
