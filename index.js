@@ -32,13 +32,22 @@ app.use(bodyParser.json());
 const connectServer = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URI);
-    console.log(`Connected to pizzamania!`);
-    app.listen(port, () => console.log(`Server on port: ${port}`));
+    console.log("Connected to pizzamania!");
+
+    // Only start a local server when not running on Vercel
+    if (!process.env.VERCEL) {
+      app.listen(port, () => {
+        console.log(`Server on port: ${port}`);
+      });
+    }
   } catch (error) {
     console.log(`Error connecting to database: ${error}`);
   }
 };
+
 connectServer();
+
+export default app;
 
 // mongoose
 //   .connect(`${db}/pizzamania`)
