@@ -77,7 +77,9 @@ export const paymentVerification = async (req, res) => {
 
       await cartModel.deleteMany({ userID: userID });
 
-      res.redirect(`${process.env.CLIENT_URL}/my_orders?reference=${razorpay_payment_id}`);
+      res.redirect(
+        `${process.env.CLIENT_URL}/my_orders?reference=${razorpay_payment_id}`,
+      );
     } else {
       res.status(400).json({
         success: false,
@@ -93,8 +95,7 @@ export const paymentVerification = async (req, res) => {
 export const razorpayKey = (req, res) => {
   try {
     res.status(200).json({
-      // key: "rzp_test_4XcyszlCMGMfOn",
-      key: process.env.KEY_ID,
+      key: process.env.RZP_KEY,
     });
   } catch (error) {
     res.status(500).json({
